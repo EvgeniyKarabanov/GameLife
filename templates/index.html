@@ -1,0 +1,15 @@
+
+
+{% extends "base.html" %}
+{% block app_content %}
+    <form action="/process" method="post">
+        <p><b>Ширина:</b>
+        <input type="text" size="10" name="width" value="25">
+        <b>Высота:</b>
+        <input type="text" size="10" name="height" value="25">
+        </p>
+
+        <input class="btn btn-warning home" href="{{ url_for('process') }}" type="submit" value="Установить параметры">
+    </form>
+{% endblock %}
+

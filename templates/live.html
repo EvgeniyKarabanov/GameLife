@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block app_content %}
+
+    <a class="btn btn-warning home" href="{{ url_for('index') }}">Главная</a>
+    <a class="btn btn-info refresh" href="{{ url_for('live') }}">Обновить</a>
+    <div id="counter">
+    <table class="world" border=3px>
+        {% for i in range(matr|length) %}
+
+            <tr>
+                {% for j in range(matr[i]|length) %}
+                    {% if matr[i][j] == 1 %}
+                        <td class="cell living-cell"></td>
+                    {% elif old_world[i][j] == 1 and matr[i][j]==0 %}
+                        <td class="cell dead-cell"></td>
+                    {% else %}
+                        <td class="cell"></td>
+                    {% endif %}
+
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        <div class="counter">{{ counter }}</div>
+    </table>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.2.1.js')}}"></script>
+
+    <script>
+    setInterval(function(){ $("#counter").load("/live") },1000);
+    </script>
+{% endblock %}
